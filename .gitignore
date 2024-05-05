@@ -19,7 +19,7 @@ node_modules/
 # Arquivos de configuração local
 /application-local.properties
 /application-local.yml
-api/.env
+.env
 
 # Arquivos de segredos
 /application-secrets.properties
