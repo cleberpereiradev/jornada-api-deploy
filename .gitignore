@@ -1,0 +1,26 @@
+# Arquivo .gitignore para projeto Spring Boot
+
+# Arquivos gerados pelo IDE
+.idea/
+.vscode/
+
+# Arquivos de compilação
+/target/
+/build/
+
+# Arquivos de logs
+/log/
+
+# Arquivos de dependências e caches
+.m2/
+.gradle/
+node_modules/
+
+# Arquivos de configuração local
+/application-local.properties
+/application-local.yml
+api/.env
+
+# Arquivos de segredos
+/application-secrets.properties
+/application-secrets.yml
