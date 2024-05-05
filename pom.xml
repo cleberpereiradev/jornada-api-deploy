@@ -13,9 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api</name>
 	<description></description>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,9 +64,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<source>17</source>
-					<target>17</target>
-					<verbose>true</verbose>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
