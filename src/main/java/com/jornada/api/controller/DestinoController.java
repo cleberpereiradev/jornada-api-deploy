@@ -53,11 +53,26 @@ public class DestinoController {
         return ResponseEntity.ok(new DadosDetalhamentoDestino(dados));
     }
 
-    @GetMapping(value = "/search")
+    @GetMapping(value = "/pesquisar")
     public List<DadosListagemDestino> findDestinationByName (@RequestParam("nome") String nome) {
         var destinos = destinoService.searchByNome(nome);
 
         return destinos;
+    }
+
+    @PostMapping(value = "/roteiro")
+    public String gerarRoteiro(@RequestParam("nomeDestino") String nomeDestino, @RequestParam("quantidadeDias") int quantidadeDias) {
+        return destinoService.gerarRoteiro(nomeDestino, quantidadeDias);
+    }
+
+    @PostMapping(value = "/roteiro-alt")
+    public String gerarRoteiroAlt(@RequestParam("nomeDestino") String nomeDestino, @RequestParam("quantidadeDias") int quantidadeDias) {
+        return destinoService.gerarRoteiroAlt(nomeDestino, quantidadeDias);
+    }
+
+    @GetMapping(value = "/estacao")
+    public ResponseEntity<List<DadosListagemDestino>> findByEstacao() {
+        return ResponseEntity.ok(destinoService.findByEstacao());
     }
 
 }

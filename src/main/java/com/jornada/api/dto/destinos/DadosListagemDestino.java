@@ -1,17 +1,18 @@
 package com.jornada.api.dto.destinos;
 
 import com.jornada.api.entity.Destino;
+import com.jornada.api.entity.enums.Estacoes;
 
 import java.math.BigDecimal;
 
-public record DadosListagemDestino(Long id, String nome, String destinoImgUrl, BigDecimal preco) {
+public record DadosListagemDestino(Long id, String nome, String descricaoCompleta, String estacaoRecomendada) {
 
     public DadosListagemDestino (Destino destino) {
         this(
                 destino.getId(),
                 destino.getNome(),
-                destino.getDestinoImgUrl(),
-                destino.getPreco()
+                destino.getDescricaoCompleta(),
+                destino.getEstacaoRecomendada().getDescricao()
         );
     }
 

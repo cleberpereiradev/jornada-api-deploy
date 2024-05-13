@@ -2,15 +2,12 @@ package com.jornada.api.entity;
 
 import com.jornada.api.dto.depoimentos.DadosAtualizacaoDepoimento;
 import com.jornada.api.dto.depoimentos.DadosCadastroDepoimento;
-import com.jornada.api.dto.destinos.DadosCadastroDestino;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @Entity(name = "Depoimento")
 @Table(name = "depoimentos")
@@ -27,12 +24,13 @@ public class Depoimento {
     @NotNull
     @Column(columnDefinition = "TEXT", name = "depoimento")
     private String textoDepoimento;
-    private String imgUrl;
+    @NotNull
+    private String local;
 
     public Depoimento(DadosCadastroDepoimento dados) {
         this.nome = dados.nome();
         this.textoDepoimento = dados.textoDepoimento();
-        this.imgUrl = dados.imgUrl();
+        this.local = dados.local();
     }
 
 
@@ -43,8 +41,8 @@ public class Depoimento {
         if(dados.textoDepoimento() != null) {
             this.textoDepoimento = dados.textoDepoimento();
         }
-        if(dados.imgUrl() != null) {
-            this.imgUrl = dados.imgUrl();
+        if(dados.local() != null) {
+            this.local = dados.local();
         }
     }
 }

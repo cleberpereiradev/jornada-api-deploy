@@ -6,15 +6,19 @@ import com.jornada.api.dto.depoimentos.DadosListagemDepoimento;
 import com.jornada.api.entity.Depoimento;
 import com.jornada.api.infra.exception.ValidacaoException;
 import com.jornada.api.repository.DepoimentoRepository;
+import com.jornada.api.repository.DestinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class DepoimentoService {
     @Autowired
     private DepoimentoRepository repository;
+
 
     public List<DadosListagemDepoimento> findAll() {
         return this.repository.findAll().stream().map(DadosListagemDepoimento::new).toList();
@@ -50,6 +54,14 @@ public class DepoimentoService {
             throw new ValidacaoException("Não há depoimentos para mostrar!");
         }
         return depoimentosAleatorios;
+    }
+
+    public List<DadosListagemDepoimento> findDepoimentosByDestino(String nome) {
+        var depoimentos = repository.findDepoimentosByLocal(nome);
+        if(depoimentos == null){
+            throw new ValidacaoException("Não há depoimentos para mostrar!");
+        }
+        return Collections.singletonList(depoimentos);
     }
 
 }

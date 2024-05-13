@@ -64,4 +64,9 @@ public class DepoimentoController {
         return this.service.findRandomDepoimentos();
     }
 
+    @GetMapping(value = "depoimentos-destino")
+    public List<DadosListagemDepoimento> findDepoimentosByDestino(@RequestParam("local") String local) {
+        return this.service.findDepoimentosByDestino(local);
+    }
+
 }

@@ -11,4 +11,6 @@ public interface DepoimentoRepository extends JpaRepository<Depoimento,Long> {
 
     @Query("select d from Depoimento d order by rand() limit 3")
     List<DadosListagemDepoimento> findRandomDepoimentos();
+
+    DadosListagemDepoimento findDepoimentosByLocal(String local);
 }
