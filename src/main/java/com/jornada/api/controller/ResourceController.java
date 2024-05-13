@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ResourceController {
-    @GetMapping("/home")
+    @GetMapping("/")
     public String homeEndpoint() {
-        return "EXEMPLO DE DEU CERTO !";
+        return "BEM VINDO À JORNADA API! VOCÊ TEM ACESSOS APENAS ÀS ROTAS GET SE NÃO TIVER UMA API-KEY VÁLIDA!";
     }
 }
