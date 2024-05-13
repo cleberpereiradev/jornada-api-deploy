@@ -1,7 +1,6 @@
 package com.jornada.api.config;
 
 import com.jornada.api.gemini.GeminiInterface;
-import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +19,7 @@ public class AppConfig {
     String googleApiKey;
 
     @Bean
-    public RestClient geminiRestClient(@Value("${GEMINI_URL}") String geminiUrl, @Value("${GOOGLE_API_KEY}") String googleApiKey) {
+    public RestClient geminiRestClient(@Value("${GEMINI_URL}") String baseUrl, @Value("${GOOGLE_API_KEY}") String googleApiKey) {
 
         return RestClient.builder()
                 .baseUrl(baseUrl)

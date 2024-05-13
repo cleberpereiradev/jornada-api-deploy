@@ -8,8 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 public class AuthenticationService {
-
-    private static final Dotenv dotenv = Dotenv.load();
     private static final String AUTH_TOKEN_HEADER_NAME = "X-API-KEY";
 
     @Value("${api.key}")
