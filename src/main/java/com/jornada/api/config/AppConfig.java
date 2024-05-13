@@ -13,10 +13,10 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @Configuration
 public class AppConfig {
 
-//    @Value("${gemini.url}")
-//    String baseUrl;
-//    @Value("${google.api.key}")
-//    String googleApiKey;
+    @Value("${gemini.url}")
+    String baseUrl;
+    @Value("${google.api.key}")
+    String googleApiKey;
 
     @Bean
     public RestClient geminiRestClient( @Value("${gemini.url") String baseUrl,@Value("${google.api.key}") String googleApiKey) {

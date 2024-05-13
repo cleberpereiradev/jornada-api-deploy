@@ -6,20 +6,24 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthenticationService {
     private static final String AUTH_TOKEN_HEADER_NAME = "X-API-KEY";
 
-    @Value("${api.key}")
-    private static String AUTH_TOKEN;
+    @Value("${API_KEY}")
+    private String AUTH_TOKEN;
 
-    public static Authentication getAuthentication(HttpServletRequest request) {
+    public String getAuthToken() {
+        return AUTH_TOKEN;
+    }
+
+    public Authentication getAuthentication(HttpServletRequest request) {
         String apiKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);
-        if (apiKey == null || !apiKey.equals(AUTH_TOKEN)) {
+        if (apiKey == null || !apiKey.equals(getAuthToken())) {
             throw new BadCredentialsException("Invalid API Key");
-
         }
-        System.out.println(AUTH_TOKEN);
         return new ApiKeyAuthentication(apiKey, AuthorityUtils.NO_AUTHORITIES);
     }
 }
