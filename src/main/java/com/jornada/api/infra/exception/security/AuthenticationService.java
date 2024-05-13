@@ -13,7 +13,7 @@ public class AuthenticationService {
     private static final String AUTH_TOKEN_HEADER_NAME = "X-API-KEY";
 
     @Value("${api.key}")
-    private static final String AUTH_TOKEN = dotenv.get("API_KEY");
+    private static String AUTH_TOKEN;
 
     public static Authentication getAuthentication(HttpServletRequest request) {
         String apiKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);

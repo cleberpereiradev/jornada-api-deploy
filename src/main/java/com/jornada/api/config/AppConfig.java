@@ -14,15 +14,17 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @Configuration
 public class AppConfig {
 
-    private final Dotenv dotenv = Dotenv.load();
+    @Value("${gemini.url}")
+    String baseUrl;
+    @Value("${google.api.key}")
+    String googleApiKey;
 
     @Bean
     public RestClient geminiRestClient(@Value("${GEMINI_URL}") String geminiUrl, @Value("${GOOGLE_API_KEY}") String googleApiKey) {
-        String baseUrl = dotenv.get("GEMINI_URL");
-        String apiKey = dotenv.get("GOOGLE_API_KEY");
+
         return RestClient.builder()
                 .baseUrl(baseUrl)
-                .defaultHeader("x-goog-api-key", apiKey)
+                .defaultHeader("x-goog-api-key", googleApiKey)
                 .defaultHeader("Content-Type", "application/json")
                 .defaultHeader("Accept", "application/json")
                 .build();
