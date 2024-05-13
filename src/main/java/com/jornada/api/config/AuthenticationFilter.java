@@ -8,6 +8,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,17 +31,21 @@ public class AuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-        try {
-            Authentication authentication = authenticationService.getAuthentication((HttpServletRequest) request);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception exp) {
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
-            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            PrintWriter writer = httpResponse.getWriter();
-            writer.print(exp.getMessage());
-            writer.flush();
-            writer.close();
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        if (!HttpMethod.GET.matches(httpRequest.getMethod())) {
+            try {
+                Authentication authentication = authenticationService.getAuthentication(httpRequest);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            } catch (Exception exp) {
+                HttpServletResponse httpResponse = (HttpServletResponse) response;
+                httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                PrintWriter writer = httpResponse.getWriter();
+                writer.print(exp.getMessage());
+                writer.flush();
+                writer.close();
+                return;
+            }
         }
 
         filterChain.doFilter(request, response);
