@@ -3,6 +3,7 @@ package com.jornada.api.config;
 import com.jornada.api.gemini.GeminiInterface;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
@@ -16,7 +17,7 @@ public class AppConfig {
     private final Dotenv dotenv = Dotenv.load();
 
     @Bean
-    public RestClient geminiRestClient() {
+    public RestClient geminiRestClient(@Value("${GEMINI_URL}") String geminiUrl, @Value("${GOOGLE_API_KEY}") String googleApiKey) {
         String baseUrl = dotenv.get("GEMINI_URL");
         String apiKey = dotenv.get("GOOGLE_API_KEY");
         return RestClient.builder()
