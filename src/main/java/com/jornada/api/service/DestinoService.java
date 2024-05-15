@@ -2,6 +2,7 @@ package com.jornada.api.service;
 
 import com.jornada.api.dto.destinos.DadosAtualizacaoDestino;
 import com.jornada.api.dto.destinos.DadosListagemDestino;
+import com.jornada.api.dto.destinos.DadosListagemDestinoAleatorio;
 import com.jornada.api.dto.destinos.DadosListagemDestinoCompleto;
 import com.jornada.api.entity.Destino;
 import com.jornada.api.entity.enums.Estacoes;
@@ -87,5 +88,13 @@ public class DestinoService {
         Estacoes estacaoAtual = Estacoes.getEstacaoAtual();
         var destinosPorEstacao = destinoRepository.findByEstacaoRecomendada(estacaoAtual);
         return destinosPorEstacao.stream().map(DadosListagemDestino::new).toList();
+    }
+
+    public List<DadosListagemDestinoAleatorio> findRandomDestinos() {
+        var destinos = this.destinoRepository.findRandomDestinos();
+        if(destinos.isEmpty()) {
+            throw new RuntimeException("Nenhum destino encontrado");
+        }
+        return destinos;
     }
 }

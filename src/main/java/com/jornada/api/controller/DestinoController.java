@@ -75,4 +75,9 @@ public class DestinoController {
         return ResponseEntity.ok(destinoService.findByEstacao());
     }
 
+    @GetMapping(value = "/destinos-home")
+    public ResponseEntity<List<DadosListagemDestinoAleatorio>> findRandomDestinos() {
+        return ResponseEntity.ok(destinoService.findRandomDestinos());
+    }
+
 }
