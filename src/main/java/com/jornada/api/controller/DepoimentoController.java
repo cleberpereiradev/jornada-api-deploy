@@ -2,7 +2,6 @@ package com.jornada.api.controller;
 
 import com.jornada.api.dto.depoimentos.*;
 import com.jornada.api.entity.Depoimento;
-import com.jornada.api.infra.exception.ValidacaoException;
 import com.jornada.api.service.DepoimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
