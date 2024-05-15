@@ -34,6 +34,7 @@ public class Destino {
         this.estacaoRecomendada = dados.estacaoRecomendada();
     }
 
+
     public void atualizarDestino(DadosAtualizacaoDestino dados) {
         if(dados.nome() != null) {
             this.nome = dados.nome();

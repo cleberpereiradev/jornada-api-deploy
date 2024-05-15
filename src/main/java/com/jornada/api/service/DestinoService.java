@@ -1,9 +1,7 @@
 package com.jornada.api.service;
 
-import com.jornada.api.dto.destinos.DadosAtualizacaoDestino;
-import com.jornada.api.dto.destinos.DadosListagemDestino;
-import com.jornada.api.dto.destinos.DadosListagemDestinoAleatorio;
-import com.jornada.api.dto.destinos.DadosListagemDestinoCompleto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jornada.api.dto.destinos.*;
 import com.jornada.api.entity.Destino;
 import com.jornada.api.entity.enums.Estacoes;
 import com.jornada.api.gemini.GeminiInterface;
@@ -83,6 +81,7 @@ public class DestinoService {
         }
         return destinosEncontrados.stream().map(DadosListagemDestino::new).toList();
     }
+
 
     public List<DadosListagemDestino> findByEstacao() {
         Estacoes estacaoAtual = Estacoes.getEstacaoAtual();

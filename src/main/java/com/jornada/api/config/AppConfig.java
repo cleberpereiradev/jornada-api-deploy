@@ -19,7 +19,7 @@ public class AppConfig {
     String googleApiKey;
 
     @Bean
-    public RestClient geminiRestClient( @Value("${gemini.url") String baseUrl,@Value("${google.api.key}") String googleApiKey) {
+    public RestClient geminiRestClient(@Value("${gemini.url}") String baseUrl, @Value("${google.api.key}") String googleApiKey) {
 
         return RestClient.builder()
                 .baseUrl(baseUrl)
@@ -30,7 +30,7 @@ public class AppConfig {
     }
 
     @Bean
-    public GeminiInterface geminiInterface (@Qualifier("geminiRestClient") RestClient restClient) {
+    public GeminiInterface geminiInterface(@Qualifier("geminiRestClient") RestClient restClient) {
         RestClientAdapter adapter = RestClientAdapter.create(restClient);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
 
