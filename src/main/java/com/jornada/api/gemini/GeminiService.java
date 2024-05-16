@@ -33,4 +33,6 @@ public class GeminiService {
                 List.of(new Content(List.of(new TextPart(text))))));
         return response.candidates().get(0).content().parts().get(0).text();
     }
+
+
 }

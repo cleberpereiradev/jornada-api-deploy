@@ -19,7 +19,7 @@ public class AppConfig {
     String googleApiKey;
 
     @Bean
-    public RestClient geminiRestClient( @Value("${gemini.url") String baseUrl,@Value("${google.api.key}") String googleApiKey) {
+    public RestClient geminiRestClient( @Value("${gemini.url}") String baseUrl,@Value("${google.api.key}") String googleApiKey) {
 
         return RestClient.builder()
                 .baseUrl(baseUrl)

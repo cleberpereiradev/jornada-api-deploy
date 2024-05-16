@@ -17,4 +17,6 @@ public interface DestinoRepository extends JpaRepository<Destino, Long> {
     @Query("select new com.jornada.api.dto.destinos.DadosListagemDestinoAleatorio(d.id, d.nome) from Destino d order by rand() limit 3")
     List<DadosListagemDestinoAleatorio> findRandomDestinos();
 
+    boolean existsByNome(String nome);
+
 }
