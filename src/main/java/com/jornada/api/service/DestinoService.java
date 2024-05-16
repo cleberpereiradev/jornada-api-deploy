@@ -1,9 +1,6 @@
 package com.jornada.api.service;
 
-<<<<<<< HEAD
-=======
 import com.fasterxml.jackson.core.JsonProcessingException;
->>>>>>> save-destiny-from-gemini-feature
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jornada.api.dto.destinos.*;
 import com.jornada.api.entity.Destino;
