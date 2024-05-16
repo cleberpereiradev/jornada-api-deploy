@@ -1,5 +1,6 @@
 package com.jornada.api.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jornada.api.dto.destinos.*;
 import com.jornada.api.entity.Destino;
 import com.jornada.api.service.DestinoService;
@@ -53,7 +54,7 @@ public class DestinoController {
     }
 
     @GetMapping(value = "/pesquisar")
-    public List<DadosListagemDestino> findDestinationByName (@RequestParam("nome") String nome) {
+    public List<DadosListagemDestino> findDestinationByName (@RequestParam("nome") String nome) throws JsonProcessingException {
         var destinos = destinoService.searchByNome(nome);
 
         return destinos;

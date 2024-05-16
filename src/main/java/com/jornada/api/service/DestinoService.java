@@ -1,18 +1,19 @@
 package com.jornada.api.service;
 
+<<<<<<< HEAD
+=======
+import com.fasterxml.jackson.core.JsonProcessingException;
+>>>>>>> save-destiny-from-gemini-feature
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jornada.api.dto.destinos.*;
 import com.jornada.api.entity.Destino;
 import com.jornada.api.entity.enums.Estacoes;
-import com.jornada.api.gemini.GeminiInterface;
 import com.jornada.api.gemini.GeminiService;
 import com.jornada.api.repository.DestinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +68,22 @@ public class DestinoService {
         destino.atualizarDestino(dados);
     }
 
-    public List<DadosListagemDestino> searchByNome(String nome){
+
+    public DadosCadastroDestino gerarDestino(String nomeDestino) throws JsonProcessingException {
+        if (destinoRepository.existsByNome(nomeDestino)) {
+            throw new RuntimeException("Destino já existe");
+        }
+        String formatacao = "Criar Json com as propriedades: nome, descrição completa(aproximadamente 400 caracteres) e estação recomendada. Exemplo: {\"nome\": \"Florianópolis\", \"descricaoCompleta\": \"Cidade localizada no sul do Brasil, com clima tropical e muitas praias.\", \"estacaoRecomendada\": \"VERAO\"}";
+        String promptDestino = "Criar um destino com o nome: " + nomeDestino + formatacao;
+        String destinoJson = geminiService.getCompletion(promptDestino);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DadosCadastroDestino dadosCadastroDestino = objectMapper.readValue(destinoJson, DadosCadastroDestino.class);
+
+        return dadosCadastroDestino;
+    }
+
+    public List<DadosListagemDestino> searchByNome(String nome) throws JsonProcessingException {
         var destinos = destinoRepository.findAll();
         List<Destino> destinosEncontrados = new ArrayList<>();
         for(Destino destino : destinos) {
@@ -77,7 +93,11 @@ public class DestinoService {
             }
         }
         if(destinosEncontrados.isEmpty()) {
-            throw new RuntimeException("Nenhum destino encontrado");
+            // Cria um novo destino se nenhum foi encontrado
+            DadosCadastroDestino destinoGerado = this.gerarDestino(nome);
+            Destino novoDestino = new Destino(destinoGerado);
+            this.save(novoDestino);
+            destinosEncontrados.add(novoDestino);
         }
         return destinosEncontrados.stream().map(DadosListagemDestino::new).toList();
     }
