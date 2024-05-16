@@ -64,7 +64,7 @@ public class DepoimentoController {
     }
 
     @GetMapping(value = "depoimentos-destino")
-    public List<DadosListagemDepoimento> findDepoimentosByDestino(@RequestParam("local") String local) {
+    public List<List<DadosListagemDepoimento>> findDepoimentosByDestino(@RequestParam("local") String local) {
         return this.service.findDepoimentosByDestino(local);
     }
 

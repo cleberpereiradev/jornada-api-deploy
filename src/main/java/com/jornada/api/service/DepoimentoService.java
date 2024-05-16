@@ -55,8 +55,8 @@ public class DepoimentoService {
         return depoimentosAleatorios;
     }
 
-    public List<DadosListagemDepoimento> findDepoimentosByDestino(String nome) {
-        var depoimentos = repository.findDepoimentosByLocal(nome);
+    public List<List<DadosListagemDepoimento>> findDepoimentosByDestino(String local) {
+        var depoimentos = repository.findRandomDepoimentosByDestino(local);
         if(depoimentos == null){
             throw new ValidacaoException("Não há depoimentos para mostrar!");
         }
