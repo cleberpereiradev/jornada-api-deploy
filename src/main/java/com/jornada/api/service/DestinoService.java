@@ -42,14 +42,14 @@ public class DestinoService {
         this.destinoRepository.save(destino);
     }
 
-    public String gerarRoteiro(String nomeDestino, int quantidadeDias) {
-            String formatacao = "Resposta dividida em tópicos para cada dia, com sugestão de passeios pela cidade e região. Exemplo: \"Dia 1: Visita ao museu da cidade e almoço em restaurante local. Dia 2: Passeio de barco pela baía e jantar em restaurante típico.\". Máximo 1000 caracteres.;";
-            String promptRoteiro = "Roteiro de viagem para a cidade: " + nomeDestino + " para uma viagem de:  " + quantidadeDias + " dias. " + formatacao;
-        return geminiService.getCompletion(promptRoteiro);
-    }
+    public String gerarRoteiro(String nomeDestino, int quantidadeDias, boolean alternativo) {
 
-    public String gerarRoteiroAlt(String nomeDestino, int quantidadeDias) {
-        String formatacao = "Resposta dividida em tópicos para cada dia, com sugestão de passeios pela cidade e região focado em custo-benefício, incluindo acampamentos ou hostels. Exemplo: \"Dia 1: Visita ao museu da cidade e almoço em restaurante local. Dia 2: Passeio de barco pela baía e jantar em restaurante típico.\". Máximo 1000 caracteres.;";
+        String formatacao = "Resposta dividida em tópicos para cada dia, com sugestão de passeios pela cidade e região. Exemplo: \"Dia 1: Visita ao museu da cidade e almoço em restaurante local. Dia 2: Passeio de barco pela baía e jantar em restaurante típico.\". Máximo 1000 caracteres.;";
+
+        if(alternativo) {
+            formatacao = "Resposta dividida em tópicos para cada dia, com sugestão de passeios pela cidade e região focado em custo-benefício, incluindo acampamentos ou hostels. Exemplo: \"Dia 1: Visita ao museu da cidade e almoço em restaurante local. Dia 2: Passeio de barco pela baía e jantar em restaurante típico.\". Máximo 1000 caracteres.;";
+        }
+
         String promptRoteiro = "Roteiro de viagem para a cidade: " + nomeDestino + " para uma viagem de:  " + quantidadeDias + " dias. " + formatacao;
         return geminiService.getCompletion(promptRoteiro);
     }

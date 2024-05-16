@@ -61,13 +61,8 @@ public class DestinoController {
     }
 
     @PostMapping(value = "/roteiro")
-    public String gerarRoteiro(@RequestParam("nomeDestino") String nomeDestino, @RequestParam("quantidadeDias") int quantidadeDias) {
-        return destinoService.gerarRoteiro(nomeDestino, quantidadeDias);
-    }
-
-    @PostMapping(value = "/roteiro-alt")
-    public String gerarRoteiroAlt(@RequestParam("nomeDestino") String nomeDestino, @RequestParam("quantidadeDias") int quantidadeDias) {
-        return destinoService.gerarRoteiroAlt(nomeDestino, quantidadeDias);
+    public String gerarRoteiro(@RequestParam("nomeDestino") String nomeDestino, @RequestParam("quantidadeDias") int quantidadeDias, @RequestParam("alternativo") boolean alternativo){
+        return destinoService.gerarRoteiro(nomeDestino, quantidadeDias,alternativo);
     }
 
     @GetMapping(value = "/estacao")
