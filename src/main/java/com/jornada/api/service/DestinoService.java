@@ -7,6 +7,7 @@ import com.jornada.api.entity.Destino;
 import com.jornada.api.entity.enums.Estacoes;
 import com.jornada.api.gemini.GeminiService;
 import com.jornada.api.repository.DestinoRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,14 +71,21 @@ public class DestinoService {
         if (destinoRepository.existsByNome(nomeDestino)) {
             throw new RuntimeException("Destino já existe");
         }
-        String formatacao = "Criar Json com as propriedades: nome, descrição completa(aproximadamente 400 caracteres) e estação recomendada. Exemplo: {\"nome\": \"Florianópolis\", \"descricaoCompleta\": \"Cidade localizada no sul do Brasil, com clima tropical e muitas praias.\", \"estacaoRecomendada\": \"VERAO\"}";
-        String promptDestino = "Criar um destino com o nome: " + nomeDestino + formatacao;
+        String promptDestino = getString(nomeDestino);
         String destinoJson = geminiService.getCompletion(promptDestino);
 
         ObjectMapper objectMapper = new ObjectMapper();
         DadosCadastroDestino dadosCadastroDestino = objectMapper.readValue(destinoJson, DadosCadastroDestino.class);
 
         return dadosCadastroDestino;
+    }
+
+    @NotNull
+    private static String getString(String nomeDestino) {
+        String formatacao = "Criar Json com as propriedades: nome, descrição completa(aproximadamente 400 caracteres) e estação recomendada. Exemplo: {\"nome\": \"Florianópolis\", \"descricaoCompleta\": \"Cidade localizada no sul do Brasil, com clima tropical e muitas praias.\", \"estacaoRecomendada\": \"VERAO\"}";
+        String filtroLinguagem = "Somente localizar cidades existentes e aplicar um filtro para linguajar impróprio.";
+        String promptDestino = "Criar um destino com o nome: " + nomeDestino + formatacao + filtroLinguagem;
+        return promptDestino;
     }
 
     public List<DadosListagemDestino> searchByNome(String nome) throws JsonProcessingException {
@@ -107,9 +115,9 @@ public class DestinoService {
     }
 
     public List<DadosListagemDestinoAleatorio> findRandomDestinos() {
-        var destinos = this.destinoRepository.findRandomDestinos();
-        if(destinos.isEmpty()) {
-            throw new RuntimeException("Nenhum destino encontrado");
+        List<DadosListagemDestinoAleatorio> destinos = destinoRepository.findRandomDestinos();
+        if (destinos.isEmpty()) {
+            return destinos;
         }
         return destinos;
     }
