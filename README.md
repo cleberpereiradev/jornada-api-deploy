@@ -5,7 +5,7 @@ Projeto Integrador 2024/1 - Fatec Itapira.
 Integração de serviços AWS
 
 # Repositório API/AWS
-Todo desenvolvimento da API + AWS está no repositório: https://github.com/cleberpereiradev/jornada-api-deploy
+Todo desenvolvimento da API + AWS está no repositório: https://github.com/cleberpereiradev/jornada-api-deploy<br>
 Código fonte do Aplicativo que consome os serviços da API: https://github.com/otaviotfcunha/jornada
 
 ## Requisitos:
