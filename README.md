@@ -1,18 +1,21 @@
 # Projeto Jornada
 Projeto Integrador 2024/1 - Fatec Itapira.
 
+# Atividade final Computação em Nuvem 2 
+Integração de serviços AWS
+
 # Repositório API/AWS
 Todo desenvolvimento da API + AWS está no repositório: https://github.com/cleberpereiradev/jornada-api-deploy
 Código fonte do Aplicativo que consome os serviços da API: https://github.com/otaviotfcunha/jornada
 
 ## Requisitos:
 <ol>
-    <li>- [x] Fazer um aplicativo em flutter para uma solução inteligente​</li>
-    <li>- [x] Utilizar MVC</li>
-    <li>- [x] Repositório no Github</li>
-    <li>- [x] Disponibilizar o .apk</li>
-    <li>- [x] Utilizar Degign Patterns</li>
-    <li>- [x] Utilizar IA</li>
+    <li>- [x] Consumo de Serviços AWS. </li>
+    <li>- [x] A aplicação deve ser fracamente acoplada. </li>
+    <li>- [x] Desenvolvimento em equipe. </li>
+    <li>- [x] Demonstrar interação entre os serviços AWS. </li>
+    <li>- [x] Utilizar boas práticas de segurança e desenvolvimento. </li>
+    <li>- [x] Relatório técnico. </li>
 </ol> 
 
 ## Curso:
